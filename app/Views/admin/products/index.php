@@ -57,7 +57,7 @@
                     <a class="nav-link <?php echo $page === 'orders' ? 'active' : ''; ?>" href="<?= site_url('admin/orders') ?>">
                         <i class="bi bi-cart me-2"></i> Orders
                     </a>
-                    <a class="nav-link" href="<?= site_url('logout') ?>">
+                    <a class="nav-link" href="<?= site_url('admin/logout') ?>">
                         <i class="bi bi-box-arrow-right me-2"></i> Logout
                     </a>
                 </nav>
