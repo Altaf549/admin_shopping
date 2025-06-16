@@ -59,7 +59,10 @@ class Login extends BaseController
                 // Verify session was set
                 $sessionCheck = $this->session->get();
                 
-                return redirect()->to('/dashboard');
+                // Redirect to admin dashboard for admin users
+                if ($user['is_admin']) {
+                    return redirect()->to('/admin/dashboard');
+                }
             } else {
                 return redirect()->back()->with('error', 'Invalid username or password');
             }

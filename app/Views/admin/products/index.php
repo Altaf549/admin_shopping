@@ -45,19 +45,19 @@
             <div class="col-md-3 col-lg-2 sidebar">
                 <h4 class="mb-4">Admin Panel</h4>
                 <nav class="nav flex-column">
-                    <a class="nav-link <?php echo $page === 'dashboard' ? 'active' : ''; ?>" href="/admin/dashboard">
+                    <a class="nav-link <?php echo $page === 'dashboard' ? 'active' : ''; ?>" href="<?= site_url('admin/dashboard') ?>">
                         <i class="bi bi-speedometer2 me-2"></i> Dashboard
                     </a>
-                    <a class="nav-link <?php echo $page === 'users' ? 'active' : ''; ?>" href="/admin/users">
+                    <a class="nav-link <?php echo $page === 'users' ? 'active' : ''; ?>" href="<?= site_url('admin/users') ?>">
                         <i class="bi bi-people me-2"></i> Users
                     </a>
-                    <a class="nav-link <?php echo $page === 'products' ? 'active' : ''; ?>" href="/admin/products">
+                    <a class="nav-link <?php echo $page === 'products' ? 'active' : ''; ?>" href="<?= site_url('admin/products') ?>">
                         <i class="bi bi-box me-2"></i> Products
                     </a>
-                    <a class="nav-link <?php echo $page === 'orders' ? 'active' : ''; ?>" href="/admin/orders">
+                    <a class="nav-link <?php echo $page === 'orders' ? 'active' : ''; ?>" href="<?= site_url('admin/orders') ?>">
                         <i class="bi bi-cart me-2"></i> Orders
                     </a>
-                    <a class="nav-link" href="/logout">
+                    <a class="nav-link" href="<?= site_url('logout') ?>">
                         <i class="bi bi-box-arrow-right me-2"></i> Logout
                     </a>
                 </nav>
@@ -68,10 +68,10 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2><?php echo $title; ?></h2>
                     <div class="d-flex gap-2">
-                        <a href="/admin/products/create" class="btn btn-primary">
+                        <a href="<?= site_url('admin/products/create') ?>" class="btn btn-primary">
                             <i class="bi bi-plus me-2"></i> Add Product
                         </a>
-                        <a href="/admin/dashboard" class="btn btn-secondary">
+                        <a href="<?= site_url('admin/dashboard') ?>" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i> Back to Dashboard
                         </a>
                     </div>
@@ -117,10 +117,10 @@
                                     <td>$<?php echo number_format($product['price'], 2); ?></td>
                                     <td><?php echo $product['stock']; ?></td>
                                     <td>
-                                        <a href="/admin/products/edit/<?php echo $product['id']; ?>" class="btn btn-sm btn-primary">
+                                        <a href="<?= site_url('admin/products/edit/' . $product['id']) ?>" class="btn btn-sm btn-primary">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <form action="/admin/products/delete/<?php echo $product['id']; ?>" method="POST" class="d-inline">
+                                        <form action="<?= site_url('admin/products/delete/' . $product['id']) ?>" method="POST" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
                                                 <i class="bi bi-trash"></i>
                                             </button>

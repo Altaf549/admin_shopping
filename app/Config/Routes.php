@@ -10,7 +10,7 @@ $routes->get('/', 'Home::index');
 // Authentication routes
 $routes->get('/login', 'Auth\Login::index');
 $routes->post('/login/authenticate', 'Auth\Login::authenticate');
-$routes->get('/logout', 'Auth\Login::logout');
+$routes->get('admin/logout', 'Auth\Login::logout');
 
 // Admin routes
 

@@ -49,19 +49,19 @@
             <div class="col-md-3 col-lg-2 sidebar">
                 <h4 class="mb-4">Admin Panel</h4>
                 <nav class="nav flex-column">
-                    <a class="nav-link <?php echo $page === 'dashboard' ? 'active' : ''; ?>" href="/admin/dashboard">
+                    <a class="nav-link <?php echo $page === 'dashboard' ? 'active' : ''; ?>" href="<?= site_url('admin/dashboard') ?>">
                         <i class="bi bi-speedometer2 me-2"></i> Dashboard
                     </a>
-                    <a class="nav-link <?php echo $page === 'users' ? 'active' : ''; ?>" href="/admin/users">
+                    <a class="nav-link <?php echo $page === 'users' ? 'active' : ''; ?>" href="<?= site_url('admin/users') ?>">
                         <i class="bi bi-people me-2"></i> Users
                     </a>
-                    <a class="nav-link <?php echo $page === 'products' ? 'active' : ''; ?>" href="/admin/products">
+                    <a class="nav-link <?php echo $page === 'products' ? 'active' : ''; ?>" href="<?= site_url('admin/products') ?>">
                         <i class="bi bi-box me-2"></i> Products
                     </a>
-                    <a class="nav-link <?php echo $page === 'orders' ? 'active' : ''; ?>" href="/admin/orders">
+                    <a class="nav-link <?php echo $page === 'orders' ? 'active' : ''; ?>" href="<?= site_url('admin/orders') ?>">
                         <i class="bi bi-cart me-2"></i> Orders
                     </a>
-                    <a class="nav-link" href="/logout">
+                    <a class="nav-link" href="<?= site_url('logout') ?>">
                         <i class="bi bi-box-arrow-right me-2"></i> Logout
                     </a>
                 </nav>
@@ -72,17 +72,17 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2><?php echo $title; ?></h2>
                     <div class="d-flex gap-2">
-                        <a href="/admin/products" class="btn btn-secondary">
+                        <a href="<?= site_url('admin/products') ?>" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i> Back to Products
                         </a>
-                        <a href="/admin/dashboard" class="btn btn-secondary">
+                        <a href="<?= site_url('admin/dashboard') ?>" class="btn btn-secondary">
                             <i class="bi bi-speedometer2 me-2"></i> Dashboard
                         </a>
                     </div>
                 </div>
 
                 <div class="form-container">
-                    <form action="/admin/products/update/<?php echo $product['id']; ?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?= site_url('admin/products/update/' . $product['id']) ?>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="name" class="form-label">Product Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?php echo $product['name']; ?>" required>
