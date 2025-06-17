@@ -30,7 +30,7 @@
             <?php endif; ?>
             <?= form_open('login/authenticate', ['method' => 'post']) ?>
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="username" class="form-label">Email</label>
                     <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
