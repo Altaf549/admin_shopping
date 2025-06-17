@@ -7,7 +7,7 @@
         </a>
         
         <a class="nav-link <?php echo $page === 'brahman' ? 'active' : ''; ?>" href="<?= site_url('admin/brahman') ?>">
-            <i class="bi bi-people me-2"></i> Brahman Details
+            <i class="bi bi-people me-2"></i> Admin Details
         </a>
         
         <a class="nav-link" href="<?= site_url('logout') ?>">

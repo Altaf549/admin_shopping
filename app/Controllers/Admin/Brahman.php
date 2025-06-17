@@ -30,7 +30,7 @@ class Brahman extends Controller
             'brahmans' => $brahmanModel->paginate(10, 'brahmans'),
             'pager' => $brahmanModel->pager,
             'total' => $brahmanModel->getBrahmansCount($search),
-            'title' => 'Brahman Details',
+            'title' => 'Admin Details',
             'page' => 'brahman',
             'search' => $search
         ];
