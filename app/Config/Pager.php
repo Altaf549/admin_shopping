@@ -34,6 +34,6 @@ class Pager extends BaseConfig
      *
      * The default number of results shown in a single page.
      */
-    public int $perPage = 1;
+    public int $perPage = 10;
     public int $onEachSide = 2;  // Show 2 pages on each side of the current page
 }

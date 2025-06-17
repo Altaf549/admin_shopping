@@ -10,7 +10,7 @@ class BrahmanModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'phone', 'status', 'image', 'aadhaar_image', 'aadhaar_no', 'address', 'city', 'state', 'pincode'];
 
-    protected $perPage = 1;
+    protected $perPage = 10;
 
 
     public function getBrahmanList($page = 1, $search = null)

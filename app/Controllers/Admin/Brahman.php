@@ -27,7 +27,7 @@ class Brahman extends Controller
         }
         
         $data = [
-            'brahmans' => $brahmanModel->paginate(2, 'brahmans'),
+            'brahmans' => $brahmanModel->paginate(10, 'brahmans'),
             'pager' => $brahmanModel->pager,
             'total' => $brahmanModel->getBrahmansCount($search),
             'title' => 'Brahman Details',
