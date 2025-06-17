@@ -14,13 +14,18 @@ class Brahman extends Controller
             return redirect()->to('/login')->with('error', 'Please login first.');
         }
 
-        $model = new BrahmanModel();
+        $brahmanModel = new \App\Models\BrahmanModel();
+        $currentPage = $this->request->getGet('page_brahmans') ?? 1;
+        $search = $this->request->getGet('search') ?? null;
+        
         $data = [
+            'brahmans' => $brahmanModel->getBrahmanList($currentPage, $search),
+            'pager' => $brahmanModel->pager,
+            'total' => $brahmanModel->getBrahmansCount($search),
             'title' => 'Brahman Details',
             'page' => 'brahman',
-            'brahmans' => $model->getBrahmanList()
+            'search' => $search
         ];
-
         return view('admin/brahman', $data);
     }
 

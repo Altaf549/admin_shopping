@@ -13,7 +13,33 @@
             vertical-align: middle;
         }
         .image-container {
+            display: flex;
+            justify-content: center; /* horizontal */
+            align-items: center;     /* vertical */
+            height: 120px;           /* required for vertical centering */
+        }
+        .image-container img {
             max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+        }
+        .search-container {
+            width: 300px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .address-column {
+            width: 200px;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        .search-container input {
+            flex: 1;
+            max-width: 240px;
+        }
+        .search-container button {
+            width: 60px;
+            padding: 0.375rem 0.5rem;
         }
         .image-container img {
             max-width: 100%;
@@ -110,6 +136,8 @@
                     });
                 });
             });
+
+
         });
     </script>
 </head>
@@ -120,9 +148,16 @@
         <div class="main-content">
             <div class="container-fluid">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="card-title mb-0">Brahman Details</h3>
+                        <form id="searchForm" method="get" action="" class="search-container">
+                            <input type="text" name="search" class="form-control me-2" placeholder="Search Brahmans..." value="<?= esc(service('request')->getGet('search') ?? '') ?>">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </form>
                     </div>
+
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
@@ -130,13 +165,11 @@
                                     <th>SL No</th>
                                     <th>Photo</th>
                                     <th>Name</th>
-                                    <th>Status</th>
+                                    <th>Phone</th>
                                     <th>Aadhaar No</th>
                                     <th>Address</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>Pincode</th>
                                     <th>Aadhaar Image</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -149,11 +182,9 @@
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo esc($brahman['name']); ?></td>
+                                    <td><?php echo esc($brahman['phone']); ?></td>
                                     <td><?php echo esc($brahman['aadhaar_no']); ?></td>
-                                    <td><?php echo esc($brahman['address']); ?></td>
-                                    <td><?php echo esc($brahman['city']); ?></td>
-                                    <td><?php echo esc($brahman['state']); ?></td>
-                                    <td><?php echo esc($brahman['pincode']); ?></td>
+                                    <td class="address-column"><?php echo "${brahman['address']}, ${brahman['city']}, ${brahman['state']}, ${brahman['pincode']}"; ?></td>
                                     <td class="image-container">
                                         <?php if ($brahman['aadhaar_image']): ?>
                                             <img src="<?= esc($brahman['aadhaar_image']) ?>" alt="Aadhaar Card" class="img-thumbnail">
@@ -178,6 +209,16 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-center mt-4">
+                        <?= $pager->links('brahmans', 'brahman_pagination') ?>
+                    </div>
+                    
+                    <!-- Total Records -->
+                    <div class="text-center mt-3">
+                        <p>Total Records: <?= number_format($total) ?></p>
                     </div>
                 </div>
             </div>
