@@ -24,53 +24,6 @@
         <div class="row">
             <?= view('admin/templates/sidebar') ?>
 
-            <!-- Main Content -->
-            <div class="col-md-9 col-lg-10 main-content">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2><?php echo $title; ?></h2>
-                    <div class="d-flex gap-2">
-                        <a href="/admin/users" class="btn btn-primary">
-                            <i class="bi bi-people me-2"></i> Manage Users
-                        </a>
-                        <a href="/admin/products" class="btn btn-primary">
-                            <i class="bi bi-box me-2"></i> Manage Products
-                        </a>
-                        <a href="/admin/orders" class="btn btn-primary">
-                            <i class="bi bi-cart me-2"></i> Manage Orders
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stats-card">
-                            <h3>123</h3>
-                            <p>Total Users</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stats-card">
-                            <h3>456</h3>
-                            <p>Total Products</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stats-card">
-                            <h3>789</h3>
-                            <p>Total Orders</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stats-card">
-                            <h3>$10,000</h3>
-                            <p>Total Revenue</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -35,10 +35,8 @@ class Login extends BaseController
         // Get form data
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
-        
         // Authenticate staff member
         $staff = $staffModel->authenticate($email, $password);
-        
         if ($staff) {
             if($staff['status'] == 'active') {
                 // Set session data
@@ -59,8 +57,6 @@ class Login extends BaseController
         } else {
             return redirect()->back()->with('error', 'Invalid username or password');
         }
-        
-        return redirect()->back()->with('error', 'Invalid username or password');
     }
 
     public function logout()

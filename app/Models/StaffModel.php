@@ -11,7 +11,7 @@ class StaffModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['email', 'password', 'email', 'status'];
+    protected $allowedFields = ['uniqcode', 'password', 'email', 'status'];
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
@@ -25,7 +25,6 @@ class StaffModel extends Model
     {
         // Get staff member by email
         $staff = $this->where('email', $email)->first();
-        
         if ($staff) {
             // Verify password (assuming MD5 hash)
             if (md5($password) === $staff['password']) {

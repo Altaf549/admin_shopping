@@ -1,2 +1,165 @@
 INFO - 2025-06-17 05:46:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2025-06-17 05:46:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:50:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:51:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:52:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:52:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:52:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:52:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:52:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:54:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:54:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-06-17 05:54:21 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'brahman-solution' in C:\xampp\htdocs\brahman-solution\system\Database\MySQLi\Connection.php:184
+Stack trace:
+#0 C:\xampp\htdocs\brahman-solution\system\Database\MySQLi\Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'brahman-solutio...', 3306, '', 0)
+#1 C:\xampp\htdocs\brahman-solution\system\Database\BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\brahman-solution\system\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\brahman-solution\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\brahman-solution\system\Model.php(270): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\brahman-solution\system\BaseModel.php(676): CodeIgniter\Model->doFirst()
+#6 C:\xampp\htdocs\brahman-solution\app\Models\StaffModel.php(27): CodeIgniter\BaseModel->first()
+#7 C:\xampp\htdocs\brahman-solution\app\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate(NULL, '12345678')
+#8 C:\xampp\htdocs\brahman-solution\system\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+#9 C:\xampp\htdocs\brahman-solution\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+#10 C:\xampp\htdocs\brahman-solution\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\brahman-solution\public\index.php(82): CodeIgniter\CodeIgniter->run()
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'brahman-solution' in C:\xampp\htdocs\brahman-solution\system\Database\MySQLi\Connection.php:229
+Stack trace:
+#0 C:\xampp\htdocs\brahman-solution\system\Database\BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\brahman-solution\system\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\brahman-solution\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\brahman-solution\system\Model.php(270): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\brahman-solution\system\BaseModel.php(676): CodeIgniter\Model->doFirst()
+#5 C:\xampp\htdocs\brahman-solution\app\Models\StaffModel.php(27): CodeIgniter\BaseModel->first()
+#6 C:\xampp\htdocs\brahman-solution\app\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate(NULL, '12345678')
+#7 C:\xampp\htdocs\brahman-solution\system\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+#8 C:\xampp\htdocs\brahman-solution\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+#9 C:\xampp\htdocs\brahman-solution\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\brahman-solution\public\index.php(82): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-06-17 05:54:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'brahman-solution'
+in SYSTEMPATH\Database\BaseConnection.php on line 428.
+ 1 SYSTEMPATH\Database\BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `tbl_staff`
+WHERE `email` IS NULL
+ LIMIT 1', [], false)
+ 3 SYSTEMPATH\Model.php(270): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Models\StaffModel.php(27): CodeIgniter\BaseModel->first()
+ 6 APPPATH\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate(null, '12345678')
+ 7 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(82): CodeIgniter\CodeIgniter->run()
+INFO - 2025-06-17 05:54:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:54:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:54:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:54:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:57:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:57:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:57:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:58:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:58:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:58:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:58:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:58:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:59:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:59:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 05:59:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:00:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:00:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:00:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:01:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:01:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:01:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:01:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:01:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:03:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:03:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-17 06:03:33 --> ErrorException: Undefined variable $data
+in APPPATH\Controllers\Auth\Login.php on line 41.
+ 1 APPPATH\Controllers\Auth\Login.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\brahman-solution\\app\\Controllers\\Auth\\Login.php', 41)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(82): CodeIgniter\CodeIgniter->run()
+INFO - 2025-06-17 06:03:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:03:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:04:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:05:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:06:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:06:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:06:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-17 06:06:31 --> ErrorException: Array to string conversion
+in APPPATH\Models\StaffModel.php on line 28.
+ 1 APPPATH\Models\StaffModel.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\brahman-solution\\app\\Models\\StaffModel.php', 28)
+ 2 APPPATH\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate('admin@example.com', '12345678')
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(82): CodeIgniter\CodeIgniter->run()
+INFO - 2025-06-17 06:07:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-17 06:07:13 --> ErrorException: Array to string conversion
+in APPPATH\Models\StaffModel.php on line 28.
+ 1 APPPATH\Models\StaffModel.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\brahman-solution\\app\\Models\\StaffModel.php', 28)
+ 2 APPPATH\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate('admin@example.com', '12345678')
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(82): CodeIgniter\CodeIgniter->run()
+INFO - 2025-06-17 06:07:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-17 06:07:16 --> ErrorException: Array to string conversion
+in APPPATH\Models\StaffModel.php on line 28.
+ 1 APPPATH\Models\StaffModel.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\brahman-solution\\app\\Models\\StaffModel.php', 28)
+ 2 APPPATH\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate('admin@example.com', '12345678')
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(82): CodeIgniter\CodeIgniter->run()
+INFO - 2025-06-17 06:08:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-17 06:08:22 --> ErrorException: Array to string conversion
+in APPPATH\Models\StaffModel.php on line 28.
+ 1 APPPATH\Models\StaffModel.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\brahman-solution\\app\\Models\\StaffModel.php', 28)
+ 2 APPPATH\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate('admin@example.com', '12345678')
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(82): CodeIgniter\CodeIgniter->run()
+INFO - 2025-06-17 06:08:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:08:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-17 06:08:26 --> ErrorException: Array to string conversion
+in APPPATH\Models\StaffModel.php on line 28.
+ 1 APPPATH\Models\StaffModel.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\brahman-solution\\app\\Models\\StaffModel.php', 28)
+ 2 APPPATH\Controllers\Auth\Login.php(40): App\Models\StaffModel->authenticate('admin@example.com', '12345678')
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Auth\Login->authenticate()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(82): CodeIgniter\CodeIgniter->run()
+INFO - 2025-06-17 06:09:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:10:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:11:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:11:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:11:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:11:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:11:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-06-17 06:11:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
