@@ -37,18 +37,18 @@ class Login extends BaseController
         $password = $this->request->getPost('password');
         
         // Find user in database
-        $user = $userModel->where('username', $username)->first();
+        $user = $userModel->where('email', $username)->first();
         
         if ($user) {
             // Check if password matches (MD5 hash)
             $md5Password = md5($password);
             
-            if ($md5Password === $user['password_hash']) {
+            if ($md5Password === $user['password']) {
                 
                 // Set session data
                 $sessionData = [
                     'user_id' => $user['id'],
-                    'username' => $user['username'],
+                    'email' => $user['email'],
                     'is_admin' => $user['is_admin'],
                     'logged_in' => true
                 ];
