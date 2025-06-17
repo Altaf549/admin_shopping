@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Controllers\Admin;
+
+use CodeIgniter\Controller;
+use App\Models\BrahmanModel;
+
+class Brahman extends Controller
+{
+    public function index()
+    {
+        // Check if user is logged in
+        if (!session()->get('logged_in')) {
+            return redirect()->to('/login')->with('error', 'Please login first.');
+        }
+
+        $model = new BrahmanModel();
+        $data = [
+            'title' => 'Brahman Details',
+            'page' => 'brahman',
+            'brahmans' => $model->getBrahmanList()
+        ];
+
+        return view('admin/brahman', $data);
+    }
+
+    public function toggleStatus($id, $status)
+    {
+        // Check if user is logged in
+        if (!session()->get('logged_in')) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Please login first.']);
+        }
+
+        try {
+            $model = new BrahmanModel();
+            $brahman = $model->find($id);
+
+            if (!$brahman) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Brahman not found.']);
+            }
+
+            // Update status directly with the provided status
+            $model->update($id, ['status' => $status]);
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Status updated successfully'
+            ]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to update status: ' . $e->getMessage()
+            ]);
+        }
+    }
+}
