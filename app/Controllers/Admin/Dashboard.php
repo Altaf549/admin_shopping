@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use CodeIgniter\Controller;
-use App\Models\SeasonModel;
 
 class Dashboard extends Controller
 {

@@ -18,15 +18,23 @@ class Brahman extends Controller
         $currentPage = $this->request->getGet('page_brahmans') ?? 1;
         $search = $this->request->getGet('search') ?? null;
         
+        // Get the data first to ensure pager is initialized
+        $brahmans = $brahmanModel->getBrahmanList($currentPage, $search);
+        
+        // Add search query to pager if it exists
+        if ($search) {
+            $brahmanModel->pager->addQuery('search', $search);
+        }
+        
         $data = [
-            'brahmans' => $brahmanModel->getBrahmanList($currentPage, $search),
+            'brahmans' => $brahmanModel->paginate(2, 'brahmans'),
             'pager' => $brahmanModel->pager,
             'total' => $brahmanModel->getBrahmansCount($search),
             'title' => 'Brahman Details',
             'page' => 'brahman',
             'search' => $search
         ];
-        return view('admin/brahman', $data);
+        return view('admin/brahman.php', $data);
     }
 
     public function toggleStatus($id, $status)

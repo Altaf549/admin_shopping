@@ -1,0 +1,25 @@
+# CodeIgniter 4
+vendor/
+composer.lock
+composer.phar
+writable/
+.env
+.env.*
+!env.example
+
+# Windows
+Thumbs.db
+.DS_Store
+
+# PHP
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+
+# IDE
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project

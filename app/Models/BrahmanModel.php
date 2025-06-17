@@ -10,24 +10,25 @@ class BrahmanModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'phone', 'status', 'image', 'aadhaar_image', 'aadhaar_no', 'address', 'city', 'state', 'pincode'];
 
-    protected $perPage = 10;
+    protected $perPage = 1;
+
 
     public function getBrahmanList($page = 1, $search = null)
     {
-        $builder = $this->select('id, name, phone, status, image, aadhaar_image, aadhaar_no, address, city, state, pincode')
-                        ->orderBy('id', 'DESC');
+        $this->select('id, name, phone, status, image, aadhaar_image, aadhaar_no, address, city, state, pincode')
+             ->orderBy('id', 'DESC');
         
         if ($search) {
-            $builder->like('name', $search)
-                    ->orLike('phone', $search)
-                    ->orLike('aadhaar_no', $search)
-                    ->orLike('address', $search)
-                    ->orLike('city', $search)
-                    ->orLike('state', $search)
-                    ->orLike('pincode', $search);
+            $this->like('name', $search)
+                ->orLike('phone', $search)
+                ->orLike('aadhaar_no', $search)
+                ->orLike('address', $search)
+                ->orLike('city', $search)
+                ->orLike('state', $search)
+                ->orLike('pincode', $search);
         }
         
-        return $builder->paginate($this->perPage, 'brahmans', $page);
+        return $this->paginate($this->perPage, 'brahmans', $page);
     }
 
     public function getBrahmansCount($search = null)

@@ -213,7 +213,7 @@
                     
                     <!-- Pagination -->
                     <div class="d-flex justify-content-center mt-4">
-                        <?= $pager->links('brahmans', 'brahman_pagination') ?>
+                        <?= $pager->links('brahmans', 'bootstrap5') ?>
                     </div>
                     
                     <!-- Total Records -->
