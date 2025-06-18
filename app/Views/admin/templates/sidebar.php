@@ -10,6 +10,10 @@
             <i class="bi bi-people me-2"></i> Admin Details
         </a>
         
+        <a class="nav-link <?php echo $page === 'users' ? 'active' : ''; ?>" href="<?= site_url('admin/user') ?>">
+            <i class="bi bi-person me-2"></i> Users
+        </a>
+        
         <a class="nav-link" href="<?= site_url('logout') ?>">
             <i class="bi bi-box-arrow-right me-2"></i> Logout
         </a>

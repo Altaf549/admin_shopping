@@ -17,5 +17,7 @@ $routes->get('admin/logout', 'Auth\Login::logout');
 $routes->get('admin/dashboard', 'Admin\Dashboard::index');
 $routes->get('admin/brahman', 'Admin\Brahman::index');
 $routes->post('admin/brahman/toggle-status/(:num)/(:segment)', 'Admin\Brahman::toggleStatus/$1/$2');
+$routes->get('admin/user', 'Admin\User::index');
+$routes->post('admin/user/toggle-status/(:num)/(:segment)', 'Admin\User::toggleStatus/$1/$2');
 
 

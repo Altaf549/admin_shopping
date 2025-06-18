@@ -109,7 +109,7 @@
                     const brahmanId = this.dataset.id;
                     const status = this.checked ? 'active' : 'inactive';
                     const url = `<?= site_url('admin/brahman/toggle-status') ?>/${brahmanId}/${status}`;
-                    
+
                     fetch(url, {
                         method: 'POST',
                         headers: {
