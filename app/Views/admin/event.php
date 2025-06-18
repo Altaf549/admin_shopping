@@ -16,12 +16,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 120px;
+            height: 100px;
         }
         .image-container img {
             max-width: 100px;
             max-height: 100px;
             object-fit: cover;
+            border-radius: 4px;
         }
         .search-container {
             width: 300px;
@@ -125,7 +126,7 @@
                                     <td><?= $i++; ?></td>
                                     <td class="image-container">
                                         <?php if ($event['image']): ?>
-                                            <img src="<?= esc($event['image']) ?>" alt="Event Image" class="img-thumbnail">
+                                            <img src="<?= esc($event['image']) ?>" alt="Event Image">
                                         <?php endif; ?>
                                     </td>
                                     <td><?= esc($event['name']); ?></td>
@@ -149,6 +150,7 @@
                                     <td>
                                         <button type="button" class="btn btn-sm btn-info edit-event" 
                                                 data-id="<?= $event['id'] ?>" 
+                                                data-action="edit"
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#eventModal">
                                             <i class="bi bi-pencil"></i> Edit
@@ -244,7 +246,7 @@
                                 // Show image preview if exists
                                 if (data.event.image) {
                                     eventImagePreview.innerHTML = `
-                                        <img src="${base_url + data.event.image}" 
+                                        <img src="${data.event.image}" 
                                              class="img-thumbnail" 
                                              style="max-width: 200px;">
                                     `;
@@ -277,22 +279,23 @@
                         if (action === 'update') {
                             const row = document.getElementById(`event-row-${data.event.id}`);
                             if (row) {
-                                row.querySelector('td:nth-child(2)').textContent = data.event.name;
-                                row.querySelector('td:nth-child(3)').textContent = data.event.description;
-                                row.querySelector('td:nth-child(4)').textContent = data.event.type;
-                                
-                                // Update image if changed
+                                // Update the image cell
+                                const imageCell = row.querySelector('td:nth-child(2)');
                                 if (data.event.image) {
-                                    const imageCell = row.querySelector('td:nth-child(5)');
-                                    const imageContainer = imageCell.querySelector('.image-container');
-                                    if (imageContainer) {
-                                        imageContainer.innerHTML = `
-                                            <img src="${base_url + data.event.image}" 
-                                                 alt="${data.event.name}"
-                                                 class="img-thumbnail">
-                                        `;
-                                    }
+                                    imageCell.innerHTML = `
+                                        <div class="image-container">
+                                            <img src="${data.event.image}" 
+                                                 alt="${data.event.name}">
+                                        </div>
+                                    `;
+                                } else {
+                                    imageCell.innerHTML = '';
                                 }
+                                
+                                // Update other cells
+                                row.querySelector('td:nth-child(3)').textContent = data.event.name;
+                                row.querySelector('td:nth-child(4)').textContent = data.event.description;
+                                row.querySelector('td:nth-child(5)').textContent = data.event.type;
                             }
                         } else {
                             // Add new row if creating

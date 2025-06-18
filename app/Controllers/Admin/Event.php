@@ -26,8 +26,18 @@ class Event extends Controller
             $eventModel->pager->addQuery('search', $search);
         }
         
+        // Get all events first
+        $events = $eventModel->paginate(10, 'events');
+        
+        // Add full URL to image paths for events only if they are relative paths
+        foreach ($events as &$event) {
+            if ($event['image'] && !preg_match('#^https?://#', $event['image'])) {
+                $event['image'] = base_url($event['image']);
+            }
+        }
+
         $data = [
-            'events' => $eventModel->paginate(10, 'events'),
+            'events' => $events,
             'pager' => $eventModel->pager,
             'total' => $eventModel->getEventsCount($search),
             'title' => 'Events Management',
@@ -99,7 +109,8 @@ class Event extends Controller
             
             $imageName = $image->getRandomName();
             $image->move($uploadPath, $imageName);
-            $data['image'] = $data['image'] = base_url($uploadPath . '/' . $imageName);
+            // Store relative path in database
+            $data['image'] = $uploadPath . '/' . $imageName;
         } else {
             // If no image is uploaded, set image to null
             $data['image'] = null;
@@ -107,10 +118,15 @@ class Event extends Controller
 
         try {
             $model->insert($data);
+            $newEvent = $model->find($model->getInsertID());
+            // Add full URL to image path for response only if it's not already a URL
+            if ($newEvent['image'] && !preg_match('#^https?://#', $newEvent['image'])) {
+                $newEvent['image'] = base_url($newEvent['image']);
+            }
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Event created successfully',
-                'event' => $model->find($model->getInsertID())
+                'event' => $newEvent
             ]);
         } catch (\Exception $e) {
             return $this->response->setJSON([
@@ -131,6 +147,11 @@ class Event extends Controller
 
         if (!$event) {
             return $this->response->setJSON(['success' => false, 'message' => 'Event not found.']);
+        }
+
+        // Add full URL to image path if it exists
+        if ($event['image'] && !preg_match('#^https?://#', $event['image'])) {
+            $event['image'] = base_url($event['image']);
         }
 
         return $this->response->setJSON([
@@ -165,6 +186,10 @@ class Event extends Controller
             // Delete old image if exists
             if ($event['image']) {
                 $oldImagePath = $event['image'];
+                // Remove base_url if it exists
+                if (strpos($oldImagePath, base_url()) === 0) {
+                    $oldImagePath = substr($oldImagePath, strlen(base_url()));
+                }
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
@@ -186,10 +211,15 @@ class Event extends Controller
 
         try {
             $model->update($id, $data);
+            $updatedEvent = $model->find($id);
+            // Add full URL to image path for response only if it's not already a URL
+            if ($updatedEvent['image'] && !preg_match('#^https?://#', $updatedEvent['image'])) {
+                $updatedEvent['image'] = base_url($updatedEvent['image']);
+            }
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Event updated successfully',
-                'event' => $model->find($id)
+                'event' => $updatedEvent
             ]);
         } catch (\Exception $e) {
             return $this->response->setJSON([
