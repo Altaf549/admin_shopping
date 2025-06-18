@@ -8,7 +8,7 @@ class EventModel extends Model
 {
     protected $table = 'tbl_event';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'description', 'type', 'status', 'image'];
+    protected $allowedFields = ['name', 'description', 'type', 'status', 'image', 'uniqcode'];
 
     protected $perPage = 10;
 

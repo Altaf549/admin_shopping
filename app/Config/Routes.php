@@ -15,13 +15,20 @@ $routes->get('admin/logout', 'Auth\Login::logout');
 // Admin routes
 
 $routes->get('admin/dashboard', 'Admin\Dashboard::index');
+
+//Brahman routes
 $routes->get('admin/brahman', 'Admin\Brahman::index');
 $routes->post('admin/brahman/toggle-status/(:num)/(:segment)', 'Admin\Brahman::toggleStatus/$1/$2');
+
+//User routes
 $routes->get('admin/user', 'Admin\User::index');
 $routes->post('admin/user/toggle-status/(:num)/(:segment)', 'Admin\User::toggleStatus/$1/$2');
 
 // Event routes
 $routes->get('admin/event', 'Admin\Event::index');
 $routes->post('admin/event/toggle-status/(:num)/(:segment)', 'Admin\Event::toggleStatus/$1/$2');
+$routes->post('admin/event/create', 'Admin\Event::create');
+$routes->post('admin/event/update', 'Admin\Event::update');
+$routes->get('admin/event/edit/(:num)', 'Admin\Event::edit/$1');
 
 
