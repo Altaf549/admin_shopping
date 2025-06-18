@@ -20,4 +20,8 @@ $routes->post('admin/brahman/toggle-status/(:num)/(:segment)', 'Admin\Brahman::t
 $routes->get('admin/user', 'Admin\User::index');
 $routes->post('admin/user/toggle-status/(:num)/(:segment)', 'Admin\User::toggleStatus/$1/$2');
 
+// Event routes
+$routes->get('admin/event', 'Admin\Event::index');
+$routes->post('admin/event/toggle-status/(:num)/(:segment)', 'Admin\Event::toggleStatus/$1/$2');
+
 
