@@ -153,37 +153,6 @@ CREATE TABLE `tbl_notification` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_settings`
---
-
-CREATE TABLE `tbl_settings` (
-  `id` int(11) NOT NULL,
-  `setting_key` varchar(100) NOT NULL,
-  `setting_value` text DEFAULT NULL,
-  `setting_group` varchar(50) DEFAULT 'general',
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `tbl_settings`
---
-
-INSERT INTO `tbl_settings` (`id`, `setting_key`, `setting_value`, `setting_group`, `created_at`, `updated_at`) VALUES
-(1, 'site_name', 'Brahman Solution', 'general', '2025-06-12 02:18:33', NULL),
-(2, 'site_email', 'info@brahmansolution.com', 'general', '2025-06-12 02:18:33', NULL),
-(3, 'site_phone', '+91 9876543210', 'general', '2025-06-12 02:18:33', NULL),
-(4, 'site_address', 'Your Address, City, State, India', 'general', '2025-06-12 02:18:33', NULL),
-(5, 'site_logo', 'assets/images/logo.png', 'general', '2025-06-12 02:18:33', NULL),
-(6, 'site_favicon', 'assets/images/favicon.ico', 'general', '2025-06-12 02:18:33', NULL),
-(7, 'about_us', '<p>About us content goes here...</p>', 'page', '2025-06-12 02:18:33', NULL),
-(8, 'terms_conditions', '<p>Terms and conditions content goes here...</p>', 'page', '2025-06-12 02:18:33', NULL),
-(9, 'privacy_policy', '<p>Privacy policy content goes here...</p>', 'page', '2025-06-12 02:18:33', NULL),
-(10, 'contact_us', '<p>Contact us content goes here...</p>', 'page', '2025-06-12 02:18:33', NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_staff`
 --
 
@@ -287,13 +256,6 @@ ALTER TABLE `tbl_notification`
   ADD UNIQUE KEY `uniqcode` (`uniqcode`);
 
 --
--- Indexes for table `tbl_settings`
---
-ALTER TABLE `tbl_settings`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `setting_key` (`setting_key`);
-
---
 -- Indexes for table `tbl_staff`
 --
 ALTER TABLE `tbl_staff`
@@ -345,12 +307,6 @@ ALTER TABLE `tbl_notification`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_settings`
---
-ALTER TABLE `tbl_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT for table `tbl_staff`
 --
 ALTER TABLE `tbl_staff`
@@ -374,6 +330,21 @@ ALTER TABLE `tbl_booking`
   ADD CONSTRAINT `tbl_booking_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `tbl_event` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `tbl_booking_ibfk_4` FOREIGN KEY (`brahman_id`) REFERENCES `tbl_admin` (`id`) ON DELETE CASCADE;
 COMMIT;
+
+-- Create tbl_about_us table
+CREATE TABLE `tbl_about_us` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniqcode` varchar(30) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniqcode` (`uniqcode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insert initial data
+INSERT INTO `tbl_about_us` (`uniqcode`, `description`) VALUES
+('ABOUT_001', 'Welcome to our About Us page. Please add your content here.');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

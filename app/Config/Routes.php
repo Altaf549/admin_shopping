@@ -38,4 +38,8 @@ $routes->post('admin/banner/create', 'Admin\Banner::create');
 $routes->post('admin/banner/update', 'Admin\Banner::update');
 $routes->get('admin/banner/edit/(:num)', 'Admin\Banner::edit/$1');
 
+// About Us routes
+$routes->get('admin/about-us', 'Admin\AboutUs::index');
+$routes->post('admin/about-us/save', 'Admin\AboutUs::save');
+
 
