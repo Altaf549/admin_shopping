@@ -26,6 +26,10 @@
             <i class="bi bi-info-circle me-2"></i> About Us
         </a>
         
+        <a class="nav-link <?php echo $page === 'terms_condition' ? 'active' : ''; ?>" href="<?= site_url('admin/terms-condition') ?>">
+            <i class="bi bi-file-text me-2"></i> Terms & Conditions
+        </a>
+        
         <a class="nav-link" href="<?= site_url('logout') ?>">
             <i class="bi bi-box-arrow-right me-2"></i> Logout
         </a>

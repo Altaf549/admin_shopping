@@ -42,4 +42,8 @@ $routes->get('admin/banner/edit/(:num)', 'Admin\Banner::edit/$1');
 $routes->get('admin/about-us', 'Admin\AboutUs::index');
 $routes->post('admin/about-us/save', 'Admin\AboutUs::save');
 
+// Terms & Conditions routes
+$routes->get('admin/terms-condition', 'Admin\TermsCondition::index');
+$routes->post('admin/terms-condition/save', 'Admin\TermsCondition::save');
+
 
