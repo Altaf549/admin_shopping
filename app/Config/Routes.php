@@ -46,4 +46,8 @@ $routes->post('admin/about-us/save', 'Admin\AboutUs::save');
 $routes->get('admin/terms-condition', 'Admin\TermsCondition::index');
 $routes->post('admin/terms-condition/save', 'Admin\TermsCondition::save');
 
+// Privacy Policy routes
+$routes->get('admin/privacy-policy', 'Admin\PrivacyPolicy::index');
+$routes->post('admin/privacy-policy/save', 'Admin\PrivacyPolicy::save');
+
 

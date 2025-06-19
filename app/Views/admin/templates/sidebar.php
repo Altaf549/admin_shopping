@@ -30,6 +30,10 @@
             <i class="bi bi-file-text me-2"></i> Terms & Conditions
         </a>
         
+        <a class="nav-link <?php echo $page === 'privacy_policy' ? 'active' : ''; ?>" href="<?= site_url('admin/privacy-policy') ?>">
+            <i class="bi bi-shield-lock me-2"></i> Privacy Policy
+        </a>
+        
         <a class="nav-link" href="<?= site_url('logout') ?>">
             <i class="bi bi-box-arrow-right me-2"></i> Logout
         </a>
