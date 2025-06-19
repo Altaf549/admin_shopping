@@ -31,4 +31,11 @@ $routes->post('admin/event/create', 'Admin\Event::create');
 $routes->post('admin/event/update', 'Admin\Event::update');
 $routes->get('admin/event/edit/(:num)', 'Admin\Event::edit/$1');
 
+// Banner routes
+$routes->get('admin/banner', 'Admin\Banner::index');
+$routes->post('admin/banner/toggle-status/(:num)/(:segment)', 'Admin\Banner::toggleStatus/$1/$2');
+$routes->post('admin/banner/create', 'Admin\Banner::create');
+$routes->post('admin/banner/update', 'Admin\Banner::update');
+$routes->get('admin/banner/edit/(:num)', 'Admin\Banner::edit/$1');
+
 

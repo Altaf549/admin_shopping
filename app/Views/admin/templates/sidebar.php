@@ -14,6 +14,10 @@
             <i class="bi bi-calendar-event me-2"></i> Events
         </a>
         
+        <a class="nav-link <?php echo $page === 'banner' ? 'active' : ''; ?>" href="<?= site_url('admin/banner') ?>">
+            <i class="bi bi-display me-2"></i> Banners
+        </a>
+        
         <a class="nav-link <?php echo $page === 'users' ? 'active' : ''; ?>" href="<?= site_url('admin/user') ?>">
             <i class="bi bi-person me-2"></i> Users
         </a>
