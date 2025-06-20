@@ -36,6 +36,14 @@ class BrahmanModel extends Model
         return $this->paginate($this->perPage, 'brahmans', $page);
     }
 
+    public function getActiveBrahmans()
+    {
+        return $this->select('id, name, phone, status, image, aadhaar_image, aadhaar_no, address, city, state, pincode')
+                    ->where('status', 'active')
+                    ->orderBy('id', 'DESC')
+                    ->findAll();
+    }
+
     public function getBrahmansCount($search = null)
     {
         $builder = $this->select('id');

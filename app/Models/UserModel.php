@@ -84,4 +84,21 @@ class UserModel extends Model
             'data' => $user
         ];
     }
+
+    public function activeUser($uniqcode) {
+        // First check if the uniqcode exists
+        $user = $this->where('uniqcode', $uniqcode)
+            ->where('status', 'active')
+            ->first();
+
+        if (!$user) {
+            return [
+                'status' => self::ERROR_USER_NOT_FOUND
+            ];
+        }
+        // Return user data on success
+        return [
+            'status' => self::ERROR_SUCCESS,
+        ];
+    }
 }

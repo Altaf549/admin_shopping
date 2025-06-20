@@ -12,6 +12,41 @@ class ApiController extends BaseController
 {
     use ResponseTrait;
     
+    public function getActiveBrahmans()
+    {
+        $brahmanModel = new \App\Models\BrahmanModel();
+        $userModel = new \App\Models\UserModel();
+        try {
+            $uniqcode = $this->request->getPost('uniqcode');
+            $result = $userModel->activeUser($uniqcode);
+            if($result['status'] != UserModel::ERROR_SUCCESS) {
+                return $this->respond([
+                    'status' => 'Error',
+                    'message' => 'User Not Found',
+                    'data' => []
+                ]);
+            }
+            $brahmans = $brahmanModel->getActiveBrahmans();
+            
+            if (empty($brahmans)) {
+                return $this->respond([
+                    'status' => 'success',
+                    'message' => 'No active brahmans found',
+                    'data' => []
+                ]);
+            }
+            
+            return $this->respond([
+                'status' => 'success',
+                'message' => 'Active brahmans retrieved successfully',
+                'data' => $brahmans
+            ]);
+            
+        } catch (\Exception $e) {
+            return $this->fail($e->getMessage());
+        }
+    }
+
     public function login()
     {
         $apiModel = new \App\Models\UserModel();
