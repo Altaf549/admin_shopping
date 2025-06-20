@@ -105,7 +105,7 @@ class Event extends Controller
             $imageName = $image->getRandomName();
             $image->move($uploadPath, $imageName);
             // Store relative path in database
-            $data['image'] = $uploadPath . '/' . $imageName;
+            $data['image'] = base_url($uploadPath . '/' . $imageName);
         } else {
             // If no image is uploaded, set image to null
             $data['image'] = null;
