@@ -8,6 +8,7 @@ use CodeIgniter\RESTful\ResourceController;
 use App\Models\UserModel;
 use App\Models\BrahmanModel;
 use App\Models\EventModel;
+use App\Models\AboutUsModel;
 
 class ApiController extends BaseController
 {
@@ -203,6 +204,54 @@ class ApiController extends BaseController
         $result = $userModel->registerUser($data);
 
         return $this->respond($result);
+    }
+
+    public function getCompanyPolicy()
+    {
+        $aboutUsModel = new \App\Models\AboutUsModel();
+        $termsConditionModel = new \App\Models\TermsConditionModel();
+        $privacyPolicyModel = new \App\Models\PrivacyPolicyModel();
+        try {
+            $type = $this->request->getPost('type');
+            if($type == null) {
+                return $this->respond([
+                    'status' => 'Success',
+                    'message' => 'No about us content found',
+                    'data' => []
+                ]);
+            }
+            switch($type) {
+                case 'About Us': 
+                    $aboutUs = $aboutUsModel->getAboutUs();
+                    break;
+                case 'Terms & condition' : 
+                    $aboutUs = $termsConditionModel -> getTermsCondition();
+                    break;
+                case 'Privacy & policy' : 
+                    $aboutUs = $privacyPolicyModel -> getPrivacyPolicy();
+                    break;
+            }
+            
+            if (empty($aboutUs)) {
+                return $this->respond([
+                    'status' => 'Success',
+                    'message' => 'No about us content found',
+                    'data' => []
+                ]);
+            }
+            
+            return $this->respond([
+                'status' => 'Success',
+                'message' => 'content retrieved successfully',
+                'data' => $aboutUs
+            ]);
+        } catch (\Exception $e) {
+            return $this->respond([
+                'status' => 'Error',
+                'message' => 'An error occurred: ' . $e->getMessage(),
+                'data' => []
+            ]);
+        }
     }
 
     public function getActiveEvents()

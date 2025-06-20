@@ -59,3 +59,4 @@ $routes->get('api/pujas', 'Api\ApiController::getActivePujas');
 $routes->post('api/user/register', 'Api\ApiController::register');
 $routes->post('api/admin/register', 'Api\ApiController::registerAdmin');
 $routes->get('api/banners', 'Api\ApiController::getActiveBanners');
+$routes->post('api/company-policy', 'Api\ApiController::getCompanyPolicy');
