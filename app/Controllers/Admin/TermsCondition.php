@@ -33,7 +33,9 @@ class TermsCondition extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $uniqcode = uniqid();
+        $helperPath = APPPATH . 'Helpers/StringHelper.php';
+        require_once $helperPath;
+        $uniqcode = \randomString();
         $data = [
             'uniqcode' => $uniqcode,
             'description' => $this->request->getPost('description'),

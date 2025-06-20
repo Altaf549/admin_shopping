@@ -73,19 +73,15 @@ class ApiController extends BaseController
     {
         $userModel = new \App\Models\UserModel();
         $data = $this->request->getPost();
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        
-        for ($i = 0; $i < 30; $i++) {
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
+        $helperPath = APPPATH . 'Helpers/StringHelper.php';
+        require_once $helperPath;
+        $uniqcode = \randomString();
         // Get request data from POST form
         $data = [
             'email' => $this->request->getPost('email'),
             'phone' => $this->request->getPost('phone'),
             'password' => $this->request->getPost('password'),
-            'uniqcode' => $randomString
+            'uniqcode' => $uniqcode
         ];
         
         // Validate required fields
@@ -125,20 +121,16 @@ class ApiController extends BaseController
     {
         $adminModel = new \App\Models\BrahmanModel();
         $data = $this->request->getPost();
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        
-        for ($i = 0; $i < 30; $i++) {
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
+        $helperPath = APPPATH . 'Helpers/StringHelper.php';
+        require_once $helperPath;
+        $uniqcode = \randomString();
         
         // Get request data from POST form
         $data = [
             'email' => $this->request->getPost('email'),
             'phone' => $this->request->getPost('phone'),
             'password' => $this->request->getPost('password'),
-            'uniqcode' => $randomString
+            'uniqcode' => $uniqcode
         ];
         
         // Validate required fields

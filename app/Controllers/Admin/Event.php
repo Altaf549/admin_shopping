@@ -89,14 +89,9 @@ class Event extends Controller
 
         $model = new EventModel();
         $data = $this->request->getPost();
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        
-        for ($i = 0; $i < 30; $i++) {
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
-        $data['uniqcode'] = $randomString;
+        $helperPath = APPPATH . 'Helpers/StringHelper.php';
+        require_once $helperPath;
+        $data['uniqcode'] = \randomString();
 
         // Handle image upload
         $image = $this->request->getFile('image');
