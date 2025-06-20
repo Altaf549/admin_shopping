@@ -8,7 +8,9 @@ class UserModel extends Model
 {
     protected $table = 'tbl_user';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'email', 'phone', 'status', 'image'];
+    protected $allowedFields = ['uniqcode', 'name', 'email', 'phone', 'status', 'image', 'password'];
+
+    const ERROR_USER_EXISTS = 'USER_EXISTS';
 
     const ERROR_USER_NOT_FOUND = 'USER_NOT_FOUND';
     const ERROR_USER_INACTIVE = 'USER_INACTIVE';
@@ -48,9 +50,73 @@ class UserModel extends Model
      * Validate user credentials
      * @param string $credential User email or phone
      * @param string $password User password
-     * @param string $credentialType Type of credential (email or phone)
-     * @return array Validation result
      */
+    public function validateCredentials($credential, $password)
+    {
+        $user = $this->where(['email' => $credential])
+                     ->orWhere(['phone' => $credential])
+                     ->first();
+
+        if (!$user) {
+            return self::ERROR_USER_NOT_FOUND;
+        }
+
+        if ($user['status'] !== 'active') {
+            return self::ERROR_USER_INACTIVE;
+        }
+
+        if (!password_verify($password, $user['password'])) {
+            return self::ERROR_INVALID_PASSWORD;
+        }
+
+        return self::ERROR_SUCCESS;
+    }
+
+    /**
+     * Register a new user
+     * @param array $userData User data containing name, email, phone, password
+     * @return array Result with status and message
+     */
+    public function registerUser($userData)
+    {
+        // Check if user already exists
+        $existingUser = $this->where(['email' => $userData['email']])
+                            ->orWhere(['phone' => $userData['phone']])
+                            ->first();
+
+        if ($existingUser) {
+            return [
+                'status' => 'error',
+                'message' => 'User already exists with this email or phone number'
+            ];
+        }
+
+        // Hash the password
+        $userData['password'] = md5($userData['password']);
+        $userData['status'] = 'active';
+
+        // Insert new user
+        if ($this->insert($userData)) {
+            $user = $this->where('email', $userData['email'])
+                     ->first();
+            return [
+                'status' => 'success',
+                'message' => 'User registered successfully',
+                'data' => $user
+            ];
+        }
+
+        return [
+            'status' => 'error',
+            'message' => 'Failed to register user',
+            'data' => []
+        ];
+    }
+
+    /**
+    * @param string $credentialType Type of credential (email or phone)
+    * @return array Validation result
+    */
     public function validateUser($credential, $password, $credentialType)
     {
         // Check if the credential exists based on type

@@ -40,6 +40,143 @@ class ApiController extends BaseController
         }
     }
     
+    public function register()
+    {
+        $userModel = new \App\Models\UserModel();
+        $data = $this->request->getPost();
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        
+        for ($i = 0; $i < 30; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        // Get request data from POST form
+        $data = [
+            'email' => $this->request->getPost('email'),
+            'phone' => $this->request->getPost('phone'),
+            'password' => $this->request->getPost('password'),
+            'uniqcode' => $randomString
+        ];
+        
+        // Validate required fields
+        $requiredFields = ['email', 'phone', 'password'];
+        foreach ($requiredFields as $field) {
+            if (!isset($data[$field]) || empty($data[$field])) {
+                return $this->respond([
+                    'status' => 'error',
+                    'message' => "Missing required field: $field"
+                ], 400);
+            }
+        }
+
+        // Validate email format
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return $this->respond([
+                'status' => 'error',
+                'message' => 'Invalid email format'
+            ], 400);
+        }
+
+        // Validate phone number format (assuming Indian format)
+        if (!preg_match('/^[0-9]{10}$/', $data['phone'])) {
+            return $this->respond([
+                'status' => 'error',
+                'message' => 'Invalid phone number format'
+            ], 400);
+        }
+
+        // Register the user
+        $result = $userModel->registerUser($data);
+
+        return $this->respond($result);
+    }
+
+    public function registerAdmin()
+    {
+        $adminModel = new \App\Models\BrahmanModel();
+        $data = $this->request->getPost();
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        
+        for ($i = 0; $i < 30; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        
+        // Get request data from POST form
+        $data = [
+            'email' => $this->request->getPost('email'),
+            'phone' => $this->request->getPost('phone'),
+            'password' => $this->request->getPost('password'),
+            'uniqcode' => $randomString
+        ];
+        
+        // Validate required fields
+        $requiredFields = ['email', 'phone', 'password', 'uniqcode'];
+        foreach ($requiredFields as $field) {
+            if (!isset($data[$field]) || empty($data[$field])) {
+                return $this->respond([
+                    'status' => 'error',
+                    'message' => "Missing required field: $field"
+                ], 400);
+            }
+        }
+
+        // Validate email format
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return $this->respond([
+                'status' => 'error',
+                'message' => 'Invalid email format'
+            ], 400);
+        }
+
+        // Validate phone number format (assuming Indian format)
+        if (!preg_match('/^[0-9]{10}$/', $data['phone'])) {
+            return $this->respond([
+                'status' => 'error',
+                'message' => 'Invalid phone number format'
+            ], 400);
+        }
+
+        // Register the admin
+        $result = $adminModel->registerAdmin($data);
+
+        return $this->respond($result);
+        
+        // Validate required fields
+        $requiredFields = ['email', 'phone', 'password'];
+        foreach ($requiredFields as $field) {
+            if (!isset($data[$field]) || empty($data[$field])) {
+                return $this->respond([
+                    'status' => 'error',
+                    'message' => "Missing required field: $field"
+                ], 400);
+            }
+        }
+
+        // Validate email format
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return $this->respond([
+                'status' => 'error',
+                'message' => 'Invalid email format'
+            ], 400);
+        }
+
+        // Validate phone number format (assuming Indian format)
+        if (!preg_match('/^[0-9]{10}$/', $data['phone'])) {
+            return $this->respond([
+                'status' => 'error',
+                'message' => 'Invalid phone number format'
+            ], 400);
+        }
+
+        // Register the user
+        $result = $userModel->registerUser($data);
+
+        return $this->respond($result);
+    }
+
     public function getActiveEvents()
     {
         $eventModel = new \App\Models\EventModel();

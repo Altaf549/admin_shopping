@@ -8,7 +8,9 @@ class BrahmanModel extends Model
 {
     protected $table = 'tbl_admin';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'phone', 'status', 'image', 'aadhaar_image', 'aadhaar_no', 'address', 'city', 'state', 'pincode'];
+    protected $allowedFields = ['name', 'phone', 'status', 'image', 'aadhaar_image', 'aadhaar_no', 'address', 'city', 'state', 'pincode', 'email', 'password', 'uniqcode'];
+
+    const ERROR_USER_EXISTS = 'USER_EXISTS';
 
     protected $perPage = 10;
 
@@ -47,7 +49,7 @@ class BrahmanModel extends Model
     public function getBrahmansCount($search = null)
     {
         $builder = $this->select('id');
-        
+
         if ($search) {
             $builder->like('name', $search)
                     ->orLike('phone', $search)
@@ -59,6 +61,47 @@ class BrahmanModel extends Model
         }
         
         return $builder->countAllResults();
+    }
+
+    /**
+     * Register a new admin
+     * @param array $adminData Admin data containing name, email, phone, password
+     * @return array Result with status and message
+     */
+    public function registerAdmin($adminData)
+    {
+        // Check if admin already exists
+        $existingAdmin = $this->where(['email' => $adminData['email']])
+                            ->orWhere(['phone' => $adminData['phone']])
+                            ->first();
+
+        if ($existingAdmin) {
+            return [
+                'status' => 'error',
+                'message' => 'Admin already exists with this email or phone number'
+            ];
+        }
+
+        // Hash the password
+        $adminData['password'] = md5($adminData['password']);
+        $adminData['status'] = 'inactive';
+
+        // Insert new admin
+        if ($this->insert($adminData)) {
+            $admin = $this->where('email', $adminData['email'])
+                        ->first();
+            return [
+                'status' => 'success',
+                'message' => 'Admin registered successfully',
+                'data' => $admin
+            ];
+        }
+
+        return [
+            'status' => 'error',
+            'message' => 'Failed to register admin',
+            'data' => []
+        ];
     }
 
     /**
@@ -86,14 +129,6 @@ class BrahmanModel extends Model
             return [
                 'status' => self::ERROR_INVALID_PASSWORD,
                 'message' => 'Invalid password'
-            ];
-        }
-
-        // Check if admin is active
-        if ($admin['status'] !== 'active') {
-            return [
-                'status' => self::ERROR_USER_INACTIVE,
-                'message' => 'Account is inactive'
             ];
         }
 
