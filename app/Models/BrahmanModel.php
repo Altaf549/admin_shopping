@@ -12,6 +12,11 @@ class BrahmanModel extends Model
 
     protected $perPage = 10;
 
+    const ERROR_USER_NOT_FOUND = 'USER_NOT_FOUND';
+    const ERROR_USER_INACTIVE = 'USER_INACTIVE';
+    const ERROR_INVALID_PASSWORD = 'INVALID_PASSWORD';
+    const ERROR_SUCCESS = 'SUCCESS';
+
 
     public function getBrahmanList($page = 1, $search = null)
     {
@@ -46,5 +51,47 @@ class BrahmanModel extends Model
         }
         
         return $builder->countAllResults();
+    }
+
+    /**
+     * Validate admin credentials
+     * @param string $email Admin email
+     * @param string $password Admin password
+     * @return array Validation result
+     */
+    public function validateAdmin($email, $password)
+    {
+        // First check if the email exists
+        $admin = $this->where('email', $email)
+                    ->first();
+                    
+        if (!$admin) {
+            return [
+                'status' => self::ERROR_USER_NOT_FOUND,
+                'message' => 'Admin not found'
+            ];
+        }
+
+        // Verify password
+        if (md5($password) !== $admin['password']) {
+            return [
+                'status' => self::ERROR_INVALID_PASSWORD,
+                'message' => 'Invalid password'
+            ];
+        }
+
+        // Check if admin is active
+        if ($admin['status'] !== 'active') {
+            return [
+                'status' => self::ERROR_USER_INACTIVE,
+                'message' => 'Account is inactive'
+            ];
+        }
+
+        // Return admin data on success
+        return [
+            'status' => self::ERROR_SUCCESS,
+            'data' => $admin
+        ];
     }
 }

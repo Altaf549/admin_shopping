@@ -50,4 +50,8 @@ $routes->post('admin/terms-condition/save', 'Admin\TermsCondition::save');
 $routes->get('admin/privacy-policy', 'Admin\PrivacyPolicy::index');
 $routes->post('admin/privacy-policy/save', 'Admin\PrivacyPolicy::save');
 
+// API routes
+$routes->post('api/login', 'Api\ApiController::login');
+$routes->post('api/admin/login', 'Api\ApiController::adminLogin');
+
 

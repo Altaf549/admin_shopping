@@ -10,6 +10,11 @@ class UserModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'email', 'phone', 'status', 'image'];
 
+    const ERROR_USER_NOT_FOUND = 'USER_NOT_FOUND';
+    const ERROR_USER_INACTIVE = 'USER_INACTIVE';
+    const ERROR_INVALID_PASSWORD = 'INVALID_PASSWORD';
+    const ERROR_SUCCESS = 'SUCCESS';
+
     protected $perPage = 10;
 
     public function getUserList($page = 1, $search = null)
@@ -37,5 +42,46 @@ class UserModel extends Model
         }
         
         return $builder->countAllResults();
+    }
+    
+    /**
+     * Validate user credentials
+     * @param string $email User email
+     * @param string $password User password
+     * @return array Validation result
+     */
+    public function validateUser($email, $password)
+    {
+        // First check if the email exists
+        $user = $this->where('email', $email)
+                    ->first();
+
+        if (!$user) {
+            return [
+                'status' => self::ERROR_USER_NOT_FOUND,
+                'message' => 'User not found'
+            ];
+        }
+
+        // Verify password
+        if (md5($password) !== $user['password']) {
+            return [
+                'status' => self::ERROR_INVALID_PASSWORD,
+                'message' => 'Invalid password'
+            ];
+        }
+
+        // Check if user is active
+        if ($user['status'] !== 'active') {
+            return [
+                'status' => self::ERROR_USER_INACTIVE,
+                'message' => 'Account is inactive'
+            ];
+        }
+        // Return user data on success
+        return [
+            'status' => self::ERROR_SUCCESS,
+            'data' => $user
+        ];
     }
 }
