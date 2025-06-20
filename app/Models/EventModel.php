@@ -38,4 +38,20 @@ class EventModel extends Model
         
         return $builder->countAllResults();
     }
+
+    public function getActiveEvents()
+    {
+        return $this->where('status', 'active')
+                    ->where('type', 'event')
+                   ->orderBy('id', 'DESC')
+                   ->findAll();
+    }
+
+    public function getActivePujas()
+    {
+        return $this->where('status', 'active')
+                    ->where('type', 'puja')
+                   ->orderBy('id', 'DESC')
+                   ->findAll();
+    }
 }

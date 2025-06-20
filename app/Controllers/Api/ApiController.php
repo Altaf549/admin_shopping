@@ -7,11 +7,86 @@ use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\UserModel;
 use App\Models\BrahmanModel;
+use App\Models\EventModel;
 
 class ApiController extends BaseController
 {
     use ResponseTrait;
+
+    public function getActivePujas()
+    {
+        $eventModel = new \App\Models\EventModel();
+        $userModel = new \App\Models\UserModel();
+        try {
+            $uniqcode = $this->request->getPost('uniqcode');
+            $result = $userModel->activeUser($uniqcode);
+            if($result['status'] != UserModel::ERROR_SUCCESS) {
+                return $this->respond([
+                    'status' => 'Error',
+                    'message' => 'User Not Found',
+                    'data' => []
+                ]);
+            }
+            $events = $eventModel->getActivePujas();
+            
+            if (empty($events)) {
+                return $this->respond([
+                    'status' => 'Success',
+                    'message' => 'No active events found',
+                    'data' => []
+                ]);
+            }
+            return $this->respond([
+                'status' => 'Success',
+                'message' => 'Active pujas retrieved successfully',
+                'data' => $events
+            ]);
+        } catch (\Exception $e) {
+            return $this->respond([
+                'status' => 'Error',
+                'message' => 'An error occurred: ' . $e->getMessage(),
+                'data' => []
+            ]);
+        }
+    }
     
+    public function getActiveEvents()
+    {
+        $eventModel = new \App\Models\EventModel();
+        $userModel = new \App\Models\UserModel();
+        try {
+            $uniqcode = $this->request->getPost('uniqcode');
+            $result = $userModel->activeUser($uniqcode);
+            if($result['status'] != UserModel::ERROR_SUCCESS) {
+                return $this->respond([
+                    'status' => 'Error',
+                    'message' => 'User Not Found',
+                    'data' => []
+                ]);
+            }
+            $events = $eventModel->getActiveEvents();
+            
+            if (empty($events)) {
+                return $this->respond([
+                    'status' => 'Success',
+                    'message' => 'No active events found',
+                    'data' => []
+                ]);
+            }
+            return $this->respond([
+                'status' => 'Success',
+                'message' => 'Active events retrieved successfully',
+                'data' => $events
+            ]);
+        } catch (\Exception $e) {
+            return $this->respond([
+                'status' => 'Error',
+                'message' => 'An error occurred: ' . $e->getMessage(),
+                'data' => []
+            ]);
+        }
+    }
+
     public function getActiveBrahmans()
     {
         $brahmanModel = new \App\Models\BrahmanModel();
