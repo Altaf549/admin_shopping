@@ -13,6 +13,34 @@ class ApiController extends BaseController
 {
     use ResponseTrait;
 
+    public function getActiveBanners()
+    {
+        $bannerModel = new \App\Models\BannerModel();
+        try {
+            $banners = $bannerModel->getActiveBanners();
+            
+            if (empty($banners)) {
+                return $this->respond([
+                    'status' => 'Success',
+                    'message' => 'No active banners found',
+                    'data' => []
+                ]);
+            }
+            
+            return $this->respond([
+                'status' => 'Success',
+                'message' => 'Active banners retrieved successfully',
+                'data' => $banners
+            ]);
+        } catch (\Exception $e) {
+            return $this->respond([
+                'status' => 'Error',
+                'message' => 'An error occurred: ' . $e->getMessage(),
+                'data' => []
+            ]);
+        }
+    }
+
     public function getActivePujas()
     {
         $eventModel = new \App\Models\EventModel();

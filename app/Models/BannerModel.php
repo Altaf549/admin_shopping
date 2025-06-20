@@ -40,4 +40,11 @@ class BannerModel extends Model
         
         return $builder->countAllResults();
     }
+
+    public function getActiveBanners()
+    {
+        return $this->where('status', 'active')
+                   ->orderBy('id', 'DESC')
+                   ->findAll();
+    }
 }
