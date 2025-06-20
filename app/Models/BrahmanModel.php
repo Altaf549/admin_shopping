@@ -63,20 +63,21 @@ class BrahmanModel extends Model
 
     /**
      * Validate admin credentials
-     * @param string $email Admin email
+     * @param string $credential Admin email or phone
      * @param string $password Admin password
+     * @param string $credentialType Type of credential (email or phone)
      * @return array Validation result
      */
-    public function validateAdmin($email, $password)
+    public function validateAdmin($credential, $password, $credentialType)
     {
-        // First check if the email exists
-        $admin = $this->where('email', $email)
-                    ->first();
-                    
+        // Check if the credential exists based on type
+        $admin = $this->where($credentialType, $credential)
+                     ->first();
+                     
         if (!$admin) {
             return [
                 'status' => self::ERROR_USER_NOT_FOUND,
-                'message' => 'Admin not found'
+                'message' => 'Invalid credentials'
             ];
         }
 

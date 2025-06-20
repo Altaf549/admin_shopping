@@ -46,20 +46,21 @@ class UserModel extends Model
     
     /**
      * Validate user credentials
-     * @param string $email User email
+     * @param string $credential User email or phone
      * @param string $password User password
+     * @param string $credentialType Type of credential (email or phone)
      * @return array Validation result
      */
-    public function validateUser($email, $password)
+    public function validateUser($credential, $password, $credentialType)
     {
-        // First check if the email exists
-        $user = $this->where('email', $email)
-                    ->first();
+        // Check if the credential exists based on type
+        $user = $this->where($credentialType, $credential)
+                     ->first();
 
         if (!$user) {
             return [
                 'status' => self::ERROR_USER_NOT_FOUND,
-                'message' => 'User not found'
+                'message' => 'Invalid credentials'
             ];
         }
 

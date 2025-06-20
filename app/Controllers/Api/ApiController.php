@@ -16,17 +16,7 @@ class ApiController extends BaseController
     public function getActivePujas()
     {
         $eventModel = new \App\Models\EventModel();
-        $userModel = new \App\Models\UserModel();
         try {
-            $uniqcode = $this->request->getPost('uniqcode');
-            $result = $userModel->activeUser($uniqcode);
-            if($result['status'] != UserModel::ERROR_SUCCESS) {
-                return $this->respond([
-                    'status' => 'Error',
-                    'message' => 'User Not Found',
-                    'data' => []
-                ]);
-            }
             $events = $eventModel->getActivePujas();
             
             if (empty($events)) {
@@ -53,19 +43,8 @@ class ApiController extends BaseController
     public function getActiveEvents()
     {
         $eventModel = new \App\Models\EventModel();
-        $userModel = new \App\Models\UserModel();
         try {
-            $uniqcode = $this->request->getPost('uniqcode');
-            $result = $userModel->activeUser($uniqcode);
-            if($result['status'] != UserModel::ERROR_SUCCESS) {
-                return $this->respond([
-                    'status' => 'Error',
-                    'message' => 'User Not Found',
-                    'data' => []
-                ]);
-            }
             $events = $eventModel->getActiveEvents();
-            
             if (empty($events)) {
                 return $this->respond([
                     'status' => 'Success',
@@ -90,17 +69,7 @@ class ApiController extends BaseController
     public function getActiveBrahmans()
     {
         $brahmanModel = new \App\Models\BrahmanModel();
-        $userModel = new \App\Models\UserModel();
         try {
-            $uniqcode = $this->request->getPost('uniqcode');
-            $result = $userModel->activeUser($uniqcode);
-            if($result['status'] != UserModel::ERROR_SUCCESS) {
-                return $this->respond([
-                    'status' => 'Error',
-                    'message' => 'User Not Found',
-                    'data' => []
-                ]);
-            }
             $brahmans = $brahmanModel->getActiveBrahmans();
             
             if (empty($brahmans)) {
@@ -127,19 +96,29 @@ class ApiController extends BaseController
         $apiModel = new \App\Models\UserModel();
         try {
             // Validate request
-            $rules = [
-                'email' => 'required|valid_email',
-                'password' => 'required|min_length[8]'
-            ];
-            
-            if (!$this->validate($rules)) {
-                return $this->failValidation($this->validator->getErrors());
+            $credential = $this->request->getPost('credential');
+            $password = $this->request->getPost('password');
+
+            // Validate credential
+            if (empty($credential)) {
+                return $this->failValidation(['credential' => 'Credential is required']);
             }
             
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
-           
-            $result = $apiModel->validateUser($email, $password);
+            // Validate password
+            if (empty($password)) {
+                return $this->failValidation(['password' => 'Password is required']);
+            }
+
+            // Determine if credential is email or phone
+            $isEmail = filter_var($credential, FILTER_VALIDATE_EMAIL);
+            $credentialType = $isEmail ? 'email' : 'phone';
+
+            // Validate password length
+            if (strlen($password) < 8) {
+                return $this->failValidation(['password' => 'Password must be at least 8 characters']);
+            }
+
+            $result = $apiModel->validateAdmin($credential, $password, $credentialType);
             
             switch ($result['status']) {
                 case UserModel::ERROR_SUCCESS:
@@ -186,19 +165,29 @@ class ApiController extends BaseController
         $apiModel = new \App\Models\BrahmanModel();
         try {
             // Validate request
-            $rules = [
-                'email' => 'required|valid_email',
-                'password' => 'required|min_length[8]'
-            ];
-            
-            if (!$this->validate($rules)) {
-                return $this->failValidation($this->validator->getErrors());
+            $credential = $this->request->getPost('credential');
+            $password = $this->request->getPost('password');
+
+            // Validate credential
+            if (empty($credential)) {
+                return $this->failValidation(['credential' => 'Credential is required']);
             }
             
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
-            
-            $result = $apiModel->validateAdmin($email, $password);
+            // Validate password
+            if (empty($password)) {
+                return $this->failValidation(['password' => 'Password is required']);
+            }
+
+            // Determine if credential is email or phone
+            $isEmail = filter_var($credential, FILTER_VALIDATE_EMAIL);
+            $credentialType = $isEmail ? 'email' : 'phone';
+
+            // Validate password length
+            if (strlen($password) < 8) {
+                return $this->failValidation(['password' => 'Password must be at least 8 characters']);
+            }
+
+            $result = $apiModel->validateAdmin($credential, $password, $credentialType);
             
             switch ($result['status']) {
                 case BrahmanModel::ERROR_SUCCESS:
