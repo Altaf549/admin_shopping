@@ -24,14 +24,14 @@
             <a class="nav-link <?php 
                 $settingsPages = ['banner', 'about-us', 'terms_condition', 'privacy_policy'];
                 echo in_array($page, $settingsPages) ? 'active' : ''; 
-            ?>" data-bs-toggle="collapse" href="#settingsMenu" role="button" aria-expanded="<?php echo in_array($page, $settingsPages) ? 'true' : 'false'; ?>" aria-controls="settingsMenu">
+            ?>" id="settings-toggle" href="#" role="button" aria-expanded="<?php echo in_array($page, $settingsPages) ? 'true' : 'false'; ?>" aria-controls="settingsMenu">
                 <div class="d-flex align-items-center w-100">
                     <i class="bi bi-gear me-2"></i>
                     <span class="flex-grow-1">Settings</span>
                     <i class="bi bi-chevron-down"></i>
                 </div>
             </a>
-            <div class="collapse <?php echo in_array($page, ['banner', 'about-us', 'terms_condition', 'privacy_policy']) ? 'show' : ''; ?>" id="settingsMenu">
+            <div class="<?php echo in_array($page, ['banner', 'about-us', 'terms_condition', 'privacy_policy']) ? 'is-open' : ''; ?>" id="settingsMenu">
                 <div class="nav flex-column ms-3">
                     <a class="nav-link <?php echo $page === 'banner' ? 'active' : ''; ?>" href="<?= site_url('admin/banner') ?>">
                         <i class="bi bi-display me-2"></i> Banners
@@ -56,7 +56,7 @@
     </nav>
 </div>
 
-<!-- Add custom JavaScript to handle settings menu behavior -->
+<!-- Add custom CSS for sidebar styling -->
 <style>
 .nav-item .nav-link {
     position: relative;
@@ -83,51 +83,38 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+#settingsMenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-out;
+}
+
+#settingsMenu.is-open {
+    max-height: 500px;
+}
 </style>
 
+<!-- Add custom JavaScript for settings menu -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const settingsToggle = document.querySelector('.nav-item .nav-link[data-bs-toggle="collapse"]');
-    const settingsMenu = document.getElementById('settingsMenu');
+    const toggleButton = document.getElementById('settings-toggle');
+    const menu = document.getElementById('settingsMenu');
 
-    if (settingsToggle) {
-        // Update chevron state when menu is toggled
-        settingsToggle.addEventListener('click', function() {
-            const chevron = this.querySelector('.bi-chevron-down');
-            if (chevron) {
-                // Toggle chevron class
-                chevron.classList.toggle('bi-chevron-up');
-                // Update aria-expanded
-                this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-                // Update menu state
-                if (settingsMenu) {
-                    settingsMenu.classList.toggle('show');
-                }
-            }
-        });
-
-        // Handle page load state
-        const isSettingsActive = settingsToggle.classList.contains('active');
-        const isMenuExpanded = settingsMenu.classList.contains('show');
-        const chevron = settingsToggle.querySelector('.bi-chevron-down');
-
-        if (chevron) {
-            // Set initial chevron state
-            chevron.classList.toggle('bi-chevron-up', isSettingsActive || isMenuExpanded);
-        }
-
-        // Update chevron state when clicking child links
-        document.querySelectorAll('.nav-item .nav-link:not([data-bs-toggle])').forEach(link => {
-            link.addEventListener('click', function() {
-                if (settingsMenu) {
-                    settingsMenu.classList.add('show');
-                    settingsToggle.setAttribute('aria-expanded', 'true');
-                    if (chevron) {
-                        chevron.classList.add('bi-chevron-up');
-                    }
-                }
-            });
+    if (toggleButton && menu) {
+        toggleButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Toggle the is-open class
+            menu.classList.toggle('is-open');
+            
+            // Toggle the aria-expanded attribute
+            toggleButton.setAttribute('aria-expanded', 
+                toggleButton.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+            );
         });
     }
 });
 </script>
+
+
